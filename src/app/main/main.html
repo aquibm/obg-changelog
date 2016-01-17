@@ -1,0 +1,78 @@
+<div class="note-menu pull-right">
+	<button class="btn btn-blue" ng-click="vm.toggleNewNote()">Add Note</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="new-note" ng-show="vm.showNewNoteForm">
+	<h2>Add new release note</h2>
+	<ng-form name="newNote">
+	<div class="form-group">
+		<label for="sharepointId">Sharepoint Issue ID</label>
+		<input type="text" class="form-control" id="sharepointId" name="sharepointId" ng-model="vm.newNote.sharepointId" focus-when="vm.showNewNoteForm">
+	</div>
+
+	<div class="form-group">
+		<label for="vsoId">VSO Bug / PBI ID</label>
+		<input type="text" class="form-control" id="vsoId" name="vsoId" ng-model="vm.newNote.vsoId">
+	</div>
+
+	<div class="form-group">
+		<label for="summary">Summary</label>
+		<textarea name="summary" class="form-control" id="summary" cols="30" rows="5" ng-model="vm.newNote.summary"></textarea>
+	</div>
+
+	<div class="form-group">
+		<label for="status">Completion Status</label>
+		<select name="status" id="status" class="form-control" ng-model="vm.newNote.completionStatus">
+			<option value="Done">Done</option>
+			<option value="In Progress">In Progress</option>
+			<option value="To Do">To Do</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-blue pull-right" ng-click="vm.submitNewNote()">Submit</button>
+	</div>
+
+	<div class="clearfix"></div>
+</ng-form>
+</div>
+
+<div class="clearfix"></div>
+
+<ul class="release-notes">
+	<li ng-repeat="note in vm.notes">
+		<div class="note-wrap {{ vm.getCompletionStatus(note.completionStatus) }}">
+			<div class="col-md-8">
+				<span ng-bind="note.sharepointId"></span>
+				<span> / </span>
+				<a target="_blank" ng-href="https://intergen.visualstudio.com/DefaultCollection/Obrien.ProjectConnect/_workitems#_a=edit&id={{note.vsoId}}"><span ng-bind="note.vsoId"></span></a>
+			</div>
+
+			<div class="col-md-4">
+				<span class="date pull-right" ng-bind="vm.parseDate(note.dateCreated) | date:'d MMM yyyy'"></span>
+			</div>
+			
+			<div class="clearfix"></div>
+
+			<div class="col-md-12">
+				<h2 ng-bind="note.summary"></h2>
+			</div>
+			
+			<div class="col-md-12">
+				<div>
+					<select name="status" id="status" class="form-control small" ng-model="note.completionStatus" ng-change="vm.saveNote(note)">
+						<option value="Done">Done</option>
+						<option value="In Progress">In Progress</option>
+						<option value="To Do">To Do</option>
+					</select>
+
+					<a href="" ng-click="vm.removeNote(note)" class="pull-right">Remove</a>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</li>
+</ul>

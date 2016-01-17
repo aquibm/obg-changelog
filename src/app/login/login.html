@@ -1,0 +1,11 @@
+<div class="login-form-wrap">
+	{{ vm.data.$value }}
+	<ng-form name="loginForm" class="login-form">
+		<h2>Login to create release notes</h2>
+
+		<input type="text" placeholder="Username" name="username">
+		<input type="password" placeholder="Password" name="password">
+
+		<button ng-click="vm.login()">Login</button>
+	</ng-form>
+</div>
