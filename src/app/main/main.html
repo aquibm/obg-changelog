@@ -9,22 +9,47 @@
 	<ng-form name="newNote">
 	<div class="form-group">
 		<label for="sharepointId">Sharepoint Issue ID</label>
-		<input type="text" class="form-control" id="sharepointId" name="sharepointId" ng-model="vm.newNote.sharepointId" focus-when="vm.showNewNoteForm">
+		<input
+			type="text"
+			required
+			class="form-control"
+			id="sharepointId"4
+			name="sharepointId"
+			ng-model="vm.newNote.sharepointId"
+			focus-when="vm.showNewNoteForm"
+			placeholder="TS-CUS-E2E-001">
 	</div>
 
 	<div class="form-group">
 		<label for="vsoId">VSO Bug / PBI ID</label>
-		<input type="text" class="form-control" id="vsoId" name="vsoId" ng-model="vm.newNote.vsoId">
+		<input
+			type="text"
+			required
+			ng-pattern="'[0-9]+'"
+			class="form-control"
+			id="vsoId"
+			name="vsoId"
+			ng-model="vm.newNote.vsoId"
+			placeholder="28788">
 	</div>
 
 	<div class="form-group">
 		<label for="summary">Summary</label>
-		<textarea name="summary" class="form-control" id="summary" cols="30" rows="5" ng-model="vm.newNote.summary"></textarea>
+		<textarea
+			required
+			name="summary"
+			class="form-control"
+			id="summary"
+			cols="30"
+			rows="5"
+			ng-model="vm.newNote.summary"
+			placeholder="Error summary">
+		</textarea>
 	</div>
 
 	<div class="form-group">
 		<label for="status">Completion Status</label>
-		<select name="status" id="status" class="form-control" ng-model="vm.newNote.completionStatus">
+		<select required name="status" id="status" class="form-control" ng-model="vm.newNote.completionStatus">
 			<option value="Done">Done</option>
 			<option value="In Progress">In Progress</option>
 			<option value="To Do">To Do</option>
@@ -32,7 +57,7 @@
 	</div>
 
 	<div class="form-group">
-		<button class="btn btn-blue pull-right" ng-click="vm.submitNewNote()">Submit</button>
+		<button ng-disabled="newNote.$invalid" class="btn btn-blue pull-right" ng-click="vm.submitNewNote()">Submit</button>
 	</div>
 
 	<div class="clearfix"></div>
