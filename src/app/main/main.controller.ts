@@ -10,6 +10,7 @@ export class MainController {
 	/* @ngInject */
 	constructor(firebaseGateway: FirebaseGateway) {
 		this.notes = firebaseGateway.getArray('releaseNotes');
+
 		this.clearNewNote();
 
 		this.statusFilter = {
@@ -17,7 +18,8 @@ export class MainController {
 				'Show All',
 				'To Do',
 				'In Progress',
-				'Done'
+				'Done',
+				'Archived'
 			],
 			selected: 'Show All'
 		};
@@ -39,6 +41,20 @@ export class MainController {
 		}, () => {
 			this.notes.$remove(note);
 		});
+	}
+
+	public archiveNote(note: any): void {
+		note.completionStatus = 'Archived';
+		this.notes.$save(note);
+	}
+
+	public restoreNote(note: any): void {
+		note.completionStatus = 'To Do';
+		this.notes.$save(note);
+	}
+
+	public isArchived(note: any): boolean {
+		return note.completionStatus === 'Archived';
 	}
 
 	public submitNewNote(): void {

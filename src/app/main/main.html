@@ -91,13 +91,19 @@
 			
 			<div class="col-md-12">
 				<div>
-					<select name="status" id="status" class="form-control small" ng-model="note.completionStatus" ng-change="vm.saveNote(note)">
+					<select ng-hide="vm.isArchived(note)" name="status" id="status" class="form-control small" ng-model="note.completionStatus" ng-change="vm.saveNote(note)">
 						<option value="Done">Done</option>
 						<option value="In Progress">In Progress</option>
 						<option value="To Do">To Do</option>
 					</select>
-
-					<a href="" ng-click="vm.removeNote(note)" class="pull-right">Remove</a>
+					
+					<div class="pull-right">
+						<div class="btn-group btn-group-sm">
+							<button ng-hide="vm.isArchived(note)" ng-click="vm.archiveNote(note)" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Archive</button>
+							<button ng-show="vm.isArchived(note)" ng-click="vm.restoreNote(note)" class="btn btn-default"><span class="glyphicon glyphicon-open"></span> Restore</button>
+							<button ng-click="vm.removeNote(note)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+						</div>
+					</div>
 				</div>
 			</div>
 
