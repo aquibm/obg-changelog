@@ -7,6 +7,7 @@ import { MainController } from './main/main.controller';
 import { LoginController } from './login/login.controller';
 import { FirebaseGateway } from './services/firebase.gateway.service';
 import { focusWhen } from './directives/focus.directive';
+import { notesFilter } from './filters/note.filter';
 
 module obgChangelog {
 	'use strict';
@@ -18,5 +19,6 @@ module obgChangelog {
 		.service('firebaseGateway', FirebaseGateway)
 		.controller('MainController', MainController)
 		.controller('LoginController', LoginController)
-		.directive('focusWhen', focusWhen);
+		.directive('focusWhen', focusWhen)
+		.filter('notesFilter', notesFilter);
 }

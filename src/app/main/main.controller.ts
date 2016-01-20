@@ -3,7 +3,7 @@ declare var swal;
 
 export class MainController {
 	public notes: any;
-	public completionStatus: Array<string> = ['To Do', 'In Progress', 'Done'];
+	public statusFilter: any;
 	public showNewNoteForm: boolean = false;
 	public newNote: any;
 
@@ -11,6 +11,16 @@ export class MainController {
 	constructor(firebaseGateway: FirebaseGateway) {
 		this.notes = firebaseGateway.getArray('releaseNotes');
 		this.clearNewNote();
+
+		this.statusFilter = {
+			options: [
+				'Show All',
+				'To Do',
+				'In Progress',
+				'Done'
+			],
+			selected: 'Show All'
+		};
 	}
 
 	public saveNote(note: any): void {
@@ -23,12 +33,12 @@ export class MainController {
 			text: 'You will not be able to recover this note!',
 			type: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "Yes, remove it!",
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'Yes, remove it!',
 			closeOnConfirm: true
 		}, () => {
 			this.notes.$remove(note);
-		});		
+		});
 	}
 
 	public submitNewNote(): void {

@@ -1,5 +1,9 @@
-<div class="note-menu pull-right">
+<div class="note-menu">
 	<button class="btn btn-blue" ng-click="vm.toggleNewNote()">Add Note</button>
+
+	<div class="pull-right">
+		<select class="form-control small" ng-model="vm.statusFilter.selected" ng-options="op as op for op in vm.statusFilter.options"></select>
+	</div>
 </div>
 
 <div class="clearfix"></div>
@@ -10,64 +14,64 @@
 	<div class="form-group">
 		<label for="sharepointId">Sharepoint Issue ID</label>
 		<input
-			type="text"
-			required
-			class="form-control"
-			id="sharepointId"4
-			name="sharepointId"
-			ng-model="vm.newNote.sharepointId"
-			focus-when="vm.showNewNoteForm"
-			placeholder="TS-CUS-E2E-001">
+		type="text"
+		required
+		class="form-control"
+		id="sharepointId"4
+		name="sharepointId"
+		ng-model="vm.newNote.sharepointId"
+		focus-when="vm.showNewNoteForm"
+		placeholder="TS-CUS-E2E-001">
 	</div>
 
 	<div class="form-group">
 		<label for="vsoId">VSO Bug / PBI ID</label>
 		<input
-			type="text"
-			required
-			ng-pattern="'[0-9]+'"
-			class="form-control"
-			id="vsoId"
-			name="vsoId"
-			ng-model="vm.newNote.vsoId"
-			placeholder="28788">
+		type="text"
+		required
+		ng-pattern="'[0-9]+'"
+		class="form-control"
+		id="vsoId"
+		name="vsoId"
+		ng-model="vm.newNote.vsoId"
+		placeholder="28788">
 	</div>
 
 	<div class="form-group">
 		<label for="summary">Summary</label>
 		<textarea
-			required
-			name="summary"
-			class="form-control"
-			id="summary"
-			cols="30"
-			rows="5"
-			ng-model="vm.newNote.summary"
-			placeholder="Error summary">
-		</textarea>
-	</div>
+		required
+		name="summary"
+		class="form-control"
+		id="summary"
+		cols="30"
+		rows="5"
+		ng-model="vm.newNote.summary"
+		placeholder="Error summary">
+	</textarea>
+</div>
 
-	<div class="form-group">
-		<label for="status">Completion Status</label>
-		<select required name="status" id="status" class="form-control" ng-model="vm.newNote.completionStatus">
-			<option value="Done">Done</option>
-			<option value="In Progress">In Progress</option>
-			<option value="To Do">To Do</option>
-		</select>
-	</div>
+<div class="form-group">
+	<label for="status">Completion Status</label>
+	<select required name="status" id="status" class="form-control" ng-model="vm.newNote.completionStatus">
+		<option value="Done">Done</option>
+		<option value="In Progress">In Progress</option>
+		<option value="To Do">To Do</option>
+	</select>
+</div>
 
-	<div class="form-group">
-		<button ng-disabled="newNote.$invalid" class="btn btn-blue pull-right" ng-click="vm.submitNewNote()">Submit</button>
-	</div>
+<div class="form-group">
+	<button ng-disabled="newNote.$invalid" class="btn btn-blue pull-right" ng-click="vm.submitNewNote()">Submit</button>
+</div>
 
-	<div class="clearfix"></div>
+<div class="clearfix"></div>
 </ng-form>
 </div>
 
 <div class="clearfix"></div>
 
 <ul class="release-notes">
-	<li ng-repeat="note in vm.notes">
+	<li ng-repeat="note in vm.notes | notesFilter:vm.statusFilter.selected">
 		<div class="note-wrap {{ vm.getCompletionStatus(note.completionStatus) }}">
 			<div class="col-md-8">
 				<span ng-bind="note.sharepointId"></span>
