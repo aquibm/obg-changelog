@@ -1,11 +1,11 @@
 <div class="login-form-wrap">
 	{{ vm.data.$value }}
-	<ng-form name="loginForm" class="login-form">
+	<ng-form name="loginForm" class="login-form" ng-submit="vm.login()">
 		<h2>Login to create release notes</h2>
 
-		<input type="text" placeholder="Username" name="username">
-		<input type="password" placeholder="Password" name="password">
+		<input type="email" placeholder="Email" name="email" ng-model="vm.email" on-enter-key="vm.login(loginForm.$invalid)">
+		<input type="password" placeholder="Password" name="password" ng-model="vm.password" on-enter-key="vm.login(loginForm.$invalid)">
 
-		<button ng-click="vm.login()">Login</button>
+		<button type="submit" ng-click="vm.login(loginForm.$invalid)">Login</button>
 	</ng-form>
 </div>

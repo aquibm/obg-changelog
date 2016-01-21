@@ -5,8 +5,10 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { LoginController } from './login/login.controller';
+import { NavbarController } from './components/navbar/navbar.controller';
 import { FirebaseGateway } from './services/firebase.gateway.service';
 import { focusWhen } from './directives/focus.directive';
+import { onEnterKey } from './directives/on.enter.key.directive';
 import { notesFilter } from './filters/note.filter';
 
 module obgChangelog {
@@ -19,6 +21,8 @@ module obgChangelog {
 		.service('firebaseGateway', FirebaseGateway)
 		.controller('MainController', MainController)
 		.controller('LoginController', LoginController)
+		.controller('NavbarController', NavbarController)
 		.directive('focusWhen', focusWhen)
+		.directive('onEnterKey', onEnterKey)
 		.filter('notesFilter', notesFilter);
 }

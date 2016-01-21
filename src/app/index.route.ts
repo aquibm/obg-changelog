@@ -1,17 +1,23 @@
-/** @ngInject */
+interface IExtendedState extends angular.ui.IState {
+	authenticate: boolean;
+}
+
+/* @ngInject */
 export function routerConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 	$stateProvider
-		.state('home', {
+		.state('home', <IExtendedState> {
 			url: '/',
 			templateUrl: 'app/main/main.html',
 			controller: 'MainController',
-			controllerAs: 'vm'
+			controllerAs: 'vm',
+			authenticate: true
 		})
-		.state('login', {
+		.state('login', <IExtendedState> {
 			url: '/login',
 			templateUrl: 'app/login/login.html',
 			controller: 'LoginController',
-			controllerAs: 'vm'
+			controllerAs: 'vm',
+			authenticate: false
 		});
 
 	$urlRouterProvider.otherwise('/');

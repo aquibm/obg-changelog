@@ -7,6 +7,7 @@ export function config($logProvider: angular.ILogProvider, toastrConfig: any) {
 	toastrConfig.allowHtml = true;
 	toastrConfig.timeOut = 3000;
 	toastrConfig.positionClass = 'toast-top-right';
-	toastrConfig.preventDuplicates = true;
+	toastrConfig.preventDuplicates = false;
+	toastrConfig.preventOpenDuplicates = false;
 	toastrConfig.progressBar = true;
 }
